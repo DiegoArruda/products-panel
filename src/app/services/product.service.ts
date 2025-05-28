@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, take, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 export interface Product {
   id: number;
   title: string;
-  price: number;
+  price: string;
   description: string;
 }
 @Injectable({
@@ -16,7 +16,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+    return this.http.get<Product[]>(this.apiUrl).pipe(
       map((products) => {
         console.log(products); // Verifique o formato dos dados
         return products.map((product) => product as Product);
