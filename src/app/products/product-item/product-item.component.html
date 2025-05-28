@@ -1,1 +1,14 @@
-<p>product-item works!</p>
+@if (errorMessage) {
+  <div  class="error">
+    {{ errorMessage }}
+  </div>
+}@else if(product && !errorMessage) {
+  <div >
+       <div class="product-detail">
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price}}</p>
+        <p>{{product.description}}</p>
+        <a routerLink="/" class="btn">Back to List</a>
+      </div>
+  </div>
+}
