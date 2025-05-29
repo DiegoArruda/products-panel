@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, take, throwError } from 'rxjs';
 
 export interface Product {
   id: number;
@@ -17,10 +17,7 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl).pipe(
-      map((products) => {
-        console.log(products); // Verifique o formato dos dados
-        return products.map((product) => product as Product);
-      }),
+      map((products) => products.slice(0, 5)),
       catchError(this.handleError)
     );
   }
